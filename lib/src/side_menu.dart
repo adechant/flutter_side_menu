@@ -215,7 +215,17 @@ class _SideMenuState extends State<SideMenu> with SideMenuWidthMixin {
         return _hasResizerToggle(child: content);
       }
     } else {
-      return content;
+      return Container(
+        decoration: BoxDecoration(
+            border: Border(
+          right: BorderSide(
+            //                   <--- right side
+            color: Theme.of(context).colorScheme.outlineVariant,
+            width: 3.0,
+          ),
+        )),
+        child: content,
+      );
     }
   }
 

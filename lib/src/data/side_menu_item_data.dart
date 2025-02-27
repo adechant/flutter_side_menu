@@ -19,6 +19,8 @@ class SideMenuItemDataTile extends SideMenuItemData {
     this.title,
     this.titleStyle,
     this.selectedTitleStyle,
+    this.trailing,
+    this.selectedTrailing,
     this.tooltip,
     this.tooltipBuilder,
     this.hasSelectedLine = true,
@@ -55,6 +57,8 @@ class SideMenuItemDataTile extends SideMenuItemData {
   final String? tooltip;
   final SideMenuItemTooltipBuilder? tooltipBuilder;
   final SideMenuItemBadgeBuilder? badgeBuilder;
+  final Widget? trailing;
+  final Widget? selectedTrailing;
   final Widget? icon;
   final Widget? selectedIcon;
   final double itemHeight;
@@ -87,6 +91,7 @@ class SideMenuItemDataTile extends SideMenuItemData {
       onTap: onTap,
       icon: icon,
       title: title,
+      trailing: trailing,
       badgeBuilder: badgeBuilder,
       selectedIcon: selectedIcon,
       tooltipBuilder: tooltipBuilder,

@@ -68,6 +68,12 @@ class _SideMenuItemTileState extends State<SideMenuItemTile> {
         : widget.data.icon;
   }
 
+  Widget? getSelectedTrailing() {
+    return widget.data.isSelected && widget.data.selectedTrailing != null
+        ? widget.data.selectedTrailing
+        : widget.data.trailing;
+  }
+
   Widget _createView({
     required BuildContext context,
   }) {
@@ -116,7 +122,10 @@ class _SideMenuItemTileState extends State<SideMenuItemTile> {
   }) {
     final hasIcon = widget.data.icon != null;
     final hasTitle = widget.data.title != null;
-    if (hasIcon && hasTitle) {
+    final hasTrailing = widget.data.trailing != null;
+    if ((hasIcon && hasTitle) ||
+        (hasTrailing && hasTitle) ||
+        (hasIcon && hasTrailing)) {
       return Row(
         children: [
           _icon(),
@@ -124,6 +133,7 @@ class _SideMenuItemTileState extends State<SideMenuItemTile> {
             Expanded(
               child: _title(context: context),
             ),
+          if (widget.isOpen) _trailing(),
         ],
       );
     } else if (hasIcon) {
@@ -150,6 +160,21 @@ class _SideMenuItemTileState extends State<SideMenuItemTile> {
                   .iconTheme
                   .copyWith(color: getSelectedColor()),
               child: getSelectedIcon()!,
+            ),
+          )
+        : const SizedBox.shrink();
+  }
+
+  Widget _trailing() {
+    return widget.data.trailing != null
+        ? SizedBox(
+            width: widget.minWidth - widget.data.margin.horizontal,
+            height: double.maxFinite,
+            child: IconTheme(
+              data: Theme.of(context)
+                  .iconTheme
+                  .copyWith(color: getSelectedColor()),
+              child: getSelectedTrailing()!,
             ),
           )
         : const SizedBox.shrink();
